@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head lang = "en">
+    <meta charset = "UTF-8">
+    <script language = "JavaScript">
+    function myFunction() {
+        document.getElementById('d1').innerHTML = "The Predicted result is :";
+    }
+    </script>
+    <title>Sentiment Analysis</title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+
+    body {
+        background: #b92b27;
+        background: -webkit-linear-gradient(to right, #b92b27, #1565c0);
+        background: linear-gradient(to right, #b92b27, #1565c0);
+    }
+
+    #myDIV {
+        color: white;
+        animation: mymove 5s;
+        animation-iteration-count: 1;
+    }
+
+    #my {
+        color: white;
+        animation: mym 5s;
+        animation-iteration-count: 1;
+    }
+
+    @keyframes mymove {
+        from {color: black;}
+        to {color: #7D3C98;}
+    }
+    
+    @keyframes mym {
+        from {color: rgb(195, 195, 218);}
+        to {color: white;}
+    }
+    
+    .bubbles img {
+        width: 50px;
+        animation: bubble 5s linear infinite;
+    }
+
+    .bubbles {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: absolute;
+        bottom: -150px;
+    }
+    
+    @keyframes bubble{
+        0% {
+            transform: translateY(0);
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-80vh);
+            opacity: 0;
+        }
+    }
+
+	.bubbles img:nth-child(1) {
+		animation-delay: 3s;
+		width: 90px;
+	}
+	.bubbles img:nth-child(2) {
+		animation-delay: 1s;
+	}
+	.bubbles img:nth-child(3) {
+		animation-delay: 2s;
+		width: 110px;
+	}
+	.bubbles img:nth-child(4) {
+		animation-delay: 4s;
+		width: 85px;
+	}
+	.bubbles img:nth-child(5) {
+		animation-delay: 5s;
+	}
+	.bubbles img:nth-child(6) {
+		animation-delay: 2s;
+		width: 100px;
+	}
+	.bubbles img:nth-child(7) {
+		animation-delay: 3.5s;
+		width: 70px;
+	}
+	.bubbles img:nth-child(8){
+		animation-delay: 3s;
+	}
+	.bubbles img:nth-child(9) {
+		animation-delay: 6.5s;
+		width: 120px;
+	}
+	.bubbles img:nth-child(10) {
+		animation-delay: 2s;
+	}
+	.bubbles img:nth-child(11) {
+		animation-delay: 5.5s;
+		width: 85px;
+	}
+	.bubbles img:nth-child(12) {
+		animation-delay: 3.5s;
+		width: 65px;
+	}
+	.bubbles img:nth-child(13) {
+		animation-delay: 3s;
+		width: 105px;
+	}
+    
+    textarea {
+        width: 50%;
+        height: 200px;
+        margin: 30px;
+        padding-top: 20px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        background-color: rgb(213, 221, 244);
+        resize: none;
+	}
+
+	textarea:focus {
+        outline: none;
+        box-shadow: 0px 0px 5px #61C5FA;
+        border: 2px solid #5AB0DB;
+	}
+
+	textarea:hover {
+	    border: 2px solid #999;
+	    border-radius: 10px;
+	}
+
+	textarea:focus:hover {
+	    outline: none;
+	    box-shadow: 0px 0px 5px #61C5FA;
+	    border: 2px solid #5AB0DB;
+	    border-radius: 10px;
+	    
+	}
+
+	.container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		text-align: center;
+		/* min-height: 5vh; */
+	}
+
+	.btn-2 {
+		width: 150px;
+		height: 45px;
+		border: none;
+		color: #3e4a79;
+		border-radius: 5px;
+		transition: ease-out 0.5s;
+		font-size: 2rem;
+        font-family: 'Source Sans Pro', sans-serif;
+		outline: none;
+		border: 2px solid #bfd5e1;
+		position: relative;
+        display: table-cell;
+        vertical-align: middle;
+		z-index: 1;
+	}
+
+	.btn-2:hover {
+		color: white;
+		cursor: pointer;
+	}
+
+	.btn-2:before {
+		transition: 0.5s all ease;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		right: 50%;
+		bottom: 0;
+		opacity: 0;
+		content: "";
+		background-color: #bfd5e1;
+	}
+
+	.btn-2:hover:before {
+		transition: 0.5s all ease;
+		left: 0;
+		right: 0;
+		opacity: 1;
+		z-index: -1;
+	}
+    
+    </style>
+    <!-- Fonts from Google -->
+    <link rel = "preconnect" href = "https://fonts.googleapis.com">
+    <link rel = "preconnect" href = "https://fonts.gstatic.com" crossorigin>
+    <link href = "https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro:wght@300;600&display=swap" rel = "stylesheet"> 
+</head>
+
+<body>
+
+    <center>
+        <p><h1 style = "color:white; font-family: 'Source Sans Pro', sans-serif; font-weight: 600;">Sentiment Analyzer</h1></p>
+    </center>
+
+	<div class = "bubbles">
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+		<img src = https://www.freeiconspng.com/thumbs/bubbles-png/bubble-transparent-hd-png-27.png>
+	</div>
+
+	<form method = "POST">
+		<center>
+            <textarea name = "text1" placeholder = "Type / Copy and paste a review here:" rows = "10" cols = "110"></textarea>
+            </br>
+            <div class = "container">
+                <button class = "btn-2"  onclick = "myFunction()" value = "Submit">
+                    <p style = "color: #3e4a79; font-family: 'Source Sans Pro', sans-serif; font-weight: 300;"> Submit</p>
+                </button>
+            </div>
+        </center>
+    </form>
+
+  <center>
+    <div id = "myDIV">
+        <h2 style = "color: white; font-family: 'Roboto', sans-serif;">Predicted sentiment for the entered review: {{result}}</h2>
+    </div>
+    <!-- <div id = "my">
+        <h3 style = "color: white; font-family: 'Roboto', sans-serif;">{{result}}</h3>
+    </div> -->
+  </center>
+
+  <center>
+    <p><h1 style = "color: white; font-family: 'Source Sans Pro', sans-serif; font-weight: 600;">Finding Weaknesses</h1></p>
+    <br/>
+    <p style = "color: white; font-family: 'Roboto', sans-serif; width: 60%;">
+        Add your review file here (CSV format only).
+        The reviews in the file will be classified based on their sentiments, and nouns 
+        which are more commonly seen in the negatively classified reviews will be displayed 
+        as possible weaknesses.
+    </p>
+    <p style = "color: lightgrey; text-transform: uppercase; font-family: 'Roboto', sans-serif;"> 
+        Note: This process can take a while. 
+    </p>
+    <br/>
+  </center>
+  
+<center>
+  <form id = "upload-form" action = "{{ url_for('upload') }}" method = "POST" enctype = "multipart/form-data">
+    <label class = "btn btn-primary" for = "my-file-selector">
+        <!-- <input id = "my-file-selector" type = "file" style = "display:none" onchange = "$('#upload-file-info').text(this.files[0].name)"> -->
+        <input id = "my-file-selector" type = "file" name = "file" style = "display:none" onchange = "$('#upload-file-info').text(this.files[0].name)" accept = ".csv" multiple>
+        Browse
+    </label>
+    <span class = 'label label-info' id = "upload-file-info"></span>    
+            <!-- <p>
+                <input id = "file-picker" type = "file" name = "file" accept = ".csv" multiple>             
+            </p> -->
+    </br>
+    <div id = "msg" style = "color: white; font-family: 'Source Sans Pro', sans-serif;"></div>
+    </br>
+    <input type = "submit" class = "btn btn-info" value = "Submit File" id = "upload-button">
+    </form>
+</center>
+
+
+</body>
+
+<script>
+    $("#my-file-selector").change(function() {
+        var input = document.getElementById('my-file-selector');
+        for (var i = 0; i < input.files.length; i++) {
+            var ext = input.files[i].name.substring(input.files[i].name.lastIndexOf('.') + 1).toLowerCase()
+            if (ext == 'csv') {
+                $("#msg").text("All good!")
+            } else {
+                $("#msg").text("This file type is not supported.")
+                document.getElementById("my-file-selector").value = "";
+            }
+        }
+    });
+</script>
+
+</html>
